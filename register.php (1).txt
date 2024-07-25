@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+</head>
+<body>
+    <h2>Register Student</h2>
+    <form method="POST" action="register.php">
+        Name: <input type="text" name="name" required><br>
+        Roll No: <input type="text" name="roll_no" required><br>
+        Class: <input type="text" name="class" required><br>
+        <input type="submit" name="submit" value="Register">
+    </form>
+
+
+    <?php
+    if (isset($_POST['submit'])) {
+        include 'db.php';
+
+
+        $name = $_POST['name'];
+        $roll_no = $_POST['roll_no'];
+        $class = $_POST['class'];
+
+
+        $sql = "INSERT INTO students (name, roll_no, class) VALUES ('$name', '$roll_no', '$class')";
+        if ($conn->query($sql) === TRUE) {
+            echo "Student registered successfully!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+
+        $conn->close();
+    }
+    ?>
+</body>
+</html>
+
